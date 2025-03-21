@@ -1,8 +1,7 @@
 "use client"
 
 import type React from "react"
-
-import { useState } from "react"
+import { useState ,useEffect} from "react"
 import { useRouter } from "next/navigation"
 import Link from "next/link"
 import { ArrowLeft, Loader2 } from "@/components/ui/icons"
@@ -12,7 +11,6 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Textarea } from "@/components/ui/textarea"
 import { ChevronDown } from "@/components/ui/icons"
-
 export default function RegisterPage({ params }: { params: { type: string } }) {
   const router = useRouter()
   const isStartup = params.type === "startup"
@@ -44,6 +42,26 @@ export default function RegisterPage({ params }: { params: { type: string } }) {
       setIsLoading(false)
       router.push(`/dashboard/${params.type}`)
     }, 1500)
+  }
+  const IndustrySelector = ({ onIndustryChange }: { onIndustryChange: (industry: string) => void }) => {
+    const [industry, setIndustry] = useState<string>("");
+  
+    useEffect(() => {
+      const storedIndustry = localStorage.getItem("selectedIndustry") || "";
+      setIndustry(storedIndustry);
+    }, []);
+  
+    const handleIndustryChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+      const selectedIndustry = event.target.value;
+      setIndustry(selectedIndustry);
+      localStorage.setItem("selectedIndustry", selectedIndustry);
+      onIndustryChange(selectedIndustry); // Pass to parent
+    };
+  }
+  function handleIndustryChange(event: React.ChangeEvent<HTMLSelectElement>): void {
+    const selectedIndustry = event.target.value;
+    setIndustry(selectedIndustry);
+    localStorage.setItem("selectedIndustry", selectedIndustry);
   }
 
   return (
@@ -90,7 +108,7 @@ export default function RegisterPage({ params }: { params: { type: string } }) {
                     id="industry"
                     className="flex h-10 w-full appearance-none rounded-md border border-input bg-background px-3 py-2 pr-8 text-sm ring-offset-background focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
                     value={industry}
-                    onChange={(e) => setIndustry(e.target.value)}
+                    onChange={handleIndustryChange}
                     required
                   >
                     <option value="" disabled>

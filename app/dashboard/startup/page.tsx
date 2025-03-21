@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useState , useEffect} from "react"
 import { Search, Bell, Calendar, Users, BookOpen, BarChart, Filter, Clock, BookMarked } from "@/components/ui/icons"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { Button } from "@/components/ui/button"
@@ -10,11 +10,19 @@ import { DashboardHeader } from "@/components/dashboard-header"
 import { DashboardShell } from "@/components/dashboard-shell"
 import { MentorCard } from "@/components/mentor-card"
 import { SessionCard } from "@/components/session-card"
-import { FeedItem } from "@/components/feed-item"
+import LiveFeed from "@/components/LiveFeed";
 import { ProcessGuide } from "@/components/process-guide"
 
 export default function StartupDashboard() {
   const [activeTab, setActiveTab] = useState("mentors")
+  const [industry, setIndustry] = useState<string>("");
+  const [selectedIndustry, setSelectedIndustry] = useState<string | null>(null);
+
+    useEffect(() => {
+        // Retrieve selected industry from localStorage
+        const storedIndustry = localStorage.getItem("selectedIndustry");
+        if (storedIndustry) setSelectedIndustry(storedIndustry);
+    }, []);
 
   return (
     <DashboardShell>
@@ -230,76 +238,7 @@ export default function StartupDashboard() {
         </TabsContent>
 
         <TabsContent value="feed" className="space-y-4">
-          <div className="h-[600px] overflow-auto pr-4">
-            <div className="space-y-4">
-              <FeedItem
-                title="10 Fundraising Mistakes to Avoid in 2025"
-                author="David Thompson"
-                role="Angel Investor & Advisor"
-                date="2 hours ago"
-                content="Many startups make critical mistakes when approaching investors. Here are the top 10 pitfalls to avoid when seeking funding in today's competitive landscape..."
-                imageUrl="/placeholder.svg?height=100&width=100&text=DT"
-                tags={["Fundraising", "Investment", "Venture Capital"]}
-                likes={42}
-                comments={8}
-              />
-              <FeedItem
-                title="Case Study: How We Achieved Product-Market Fit in 6 Months"
-                author="Emily Chen"
-                role="CTO at TechGrowth"
-                date="Yesterday"
-                content="Our journey to product-market fit was filled with pivots and learnings. In this case study, I break down the exact process we used to validate our assumptions and find our ideal customer segment..."
-                imageUrl="/placeholder.svg?height=100&width=100&text=EC"
-                tags={["Product", "Case Study", "Growth"]}
-                likes={87}
-                comments={23}
-              />
-              <FeedItem
-                title="Financial Metrics Every Founder Should Track"
-                author="James Wilson"
-                role="Former CFO at FinanceHub"
-                date="2 days ago"
-                content="Beyond revenue and burn rate, there are several key financial metrics that can provide early warning signs for your startup. Here's what you should be monitoring monthly..."
-                imageUrl="/placeholder.svg?height=100&width=100&text=JW"
-                tags={["Finance", "Metrics", "Management"]}
-                likes={65}
-                comments={12}
-              />
-              <FeedItem
-                title="How We Grew Our User Base by 300% with Zero Marketing Budget"
-                author="Sarah Johnson"
-                role="Marketing Director at BrandBoost"
-                date="3 days ago"
-                content="Organic growth strategies can be incredibly powerful when executed correctly. In this article, I share the exact tactics we used to triple our user base without spending a dollar on paid acquisition..."
-                imageUrl="/placeholder.svg?height=100&width=100&text=SJ"
-                tags={["Marketing", "Growth", "Organic"]}
-                likes={124}
-                comments={31}
-              />
-              <FeedItem
-                title="Navigating FDA Approval: A Startup's Guide"
-                author="Michael Rodriguez"
-                role="Founder of HealthTech Innovations"
-                date="4 days ago"
-                content="The FDA approval process can be daunting for healthcare startups. Based on our experience bringing three products to market, here's a practical roadmap to help you navigate the regulatory landscape..."
-                imageUrl="/placeholder.svg?height=100&width=100&text=MR"
-                tags={["Healthcare", "Regulation", "FDA"]}
-                likes={38}
-                comments={9}
-              />
-              <FeedItem
-                title="Supply Chain Optimization Strategies for Early-Stage Companies"
-                author="Aisha Patel"
-                role="VP of Operations at LogisticsPro"
-                date="5 days ago"
-                content="Even with limited resources, startups can implement robust supply chain practices. Here are five strategies we've implemented with our clients to reduce costs and improve reliability..."
-                imageUrl="/placeholder.svg?height=100&width=100&text=AP"
-                tags={["Operations", "Supply Chain", "Optimization"]}
-                likes={52}
-                comments={7}
-              />
-            </div>
-          </div>
+          <LiveFeed/>
         </TabsContent>
 
         <TabsContent value="process" className="space-y-4">
