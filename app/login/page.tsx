@@ -41,7 +41,7 @@ export default function LoginPage() {
 
         <Card>
           <CardHeader>
-            <CardTitle>Log in to MentorMatch</CardTitle>
+            <CardTitle>Log in to Nurture Path</CardTitle>
             <CardDescription>Enter your credentials to access your account</CardDescription>
           </CardHeader>
           <CardContent>

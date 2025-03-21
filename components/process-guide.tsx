@@ -5,7 +5,7 @@ import { CheckCircle2, Circle, ArrowRight } from "@/components/ui/icons"
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Separator } from "@/components/ui/separator"
-
+import Chatbot from "@/components/chatbot";
 export function ProcessGuide() {
   const [activeStage, setActiveStage] = useState("ideation")
 
@@ -177,6 +177,10 @@ export function ProcessGuide() {
           </Button>
         </CardFooter>
       </Card>
+      <div className="relative min-h-screen bg-gray-900 text-white">
+      <h1 className="text-center text-3xl font-bold pt-10">Welcome to Startup AI Assistant</h1>
+      <Chatbot />
+    </div>
     </div>
   )
 }

@@ -13,7 +13,7 @@ export function HeroSection() {
                 Connect, Learn, and Grow with Industry Experts
               </h1>
               <p className="max-w-[600px] text-muted-foreground md:text-xl">
-                MentorMatch bridges the gap between ambitious startups and experienced industry professionals, providing
+                Nurture Path bridges the gap between ambitious startups and experienced industry professionals, providing
                 structured guidance for your entrepreneurial journey.
               </p>
             </div>
@@ -40,9 +40,9 @@ export function HeroSection() {
           </div>
           <div className="flex items-center justify-center">
             <img
-              alt="Hero Image"
+              alt="logo"
               className="aspect-video overflow-hidden rounded-xl object-cover object-center sm:w-full lg:order-last"
-              src="/placeholder.svg?height=550&width=750"
+              src="/logo.png"
             />
           </div>
         </div>

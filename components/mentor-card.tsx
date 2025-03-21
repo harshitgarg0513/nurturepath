@@ -65,7 +65,7 @@ export function MentorCard({
             <Calendar className="h-4 w-4 text-muted-foreground" />
             <span className="text-muted-foreground">{availability}</span>
           </div>
-          <div className="font-medium">${hourlyRate}/hour</div>
+          <div className="font-medium">INR {hourlyRate}/hour</div>
         </div>
       </CardContent>
       <CardFooter className="p-6 pt-0 flex justify-between">
